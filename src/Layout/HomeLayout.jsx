@@ -8,7 +8,7 @@ const HomeLayout = () => {
       <nav className="w-full">
         <Navbar></Navbar>
       </nav>
-      <div>
+      <div className="mx-auto w-10/12">
         <Outlet></Outlet>
       </div>
     </div>
