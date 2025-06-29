@@ -43,7 +43,7 @@ const Hero = () => {
 
   return (
     <motion.section
-      className="flex w-full flex-col items-center justify-between gap-12 px-2 py-16 md:gap-6 lg:flex-row lg:px-12"
+      className="flex w-full flex-col items-center justify-between gap-12 px-2 py-16 md:gap-6 lg:flex-row"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -80,6 +80,7 @@ const Hero = () => {
         <motion.div
           className="mt-6 hidden items-center justify-center gap-4 lg:flex lg:justify-start"
           variants={itemVariants}
+          whileTap={{ scale: 0.95 }}
         >
           <a
             href="/path-to-your-resume.pdf"
@@ -147,7 +148,7 @@ const Hero = () => {
         <div className="absolute -z-10 h-[80%] w-[80%] rounded-full bg-cyan-500/20 blur-3xl"></div>
       </motion.div>
 
-      {/* 💅 Socials & Resume Button (FOR MOBILE) */}
+      {/* Socials & Resume Button (FOR MOBILE) */}
       <motion.div
         className="mt-6 flex w-full flex-col items-center gap-4 lg:hidden"
         variants={itemVariants}

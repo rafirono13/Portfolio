@@ -5,10 +5,10 @@ import Navbar from '../Components/Common/Navbar';
 const HomeLayout = () => {
   return (
     <div className="mx-auto min-h-screen w-10/12">
-      <nav className="w-full">
+      <nav className="fixed z-[100] mx-auto w-10/12">
         <Navbar></Navbar>
       </nav>
-      <div className="mx-auto w-10/12">
+      <div className="mx-auto md:w-10/12">
         <Outlet></Outlet>
       </div>
     </div>

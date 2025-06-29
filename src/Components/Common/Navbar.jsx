@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar = () => {
   return (
-    <nav className="sticky z-[100] mx-auto w-9/12 pt-10">
+    <nav className="mx-auto pt-2 md:w-9/12">
       <ul className="flex items-center justify-center gap-6 rounded-full border border-white/20 bg-white/10 px-6 py-2 text-sm font-medium text-gray-200 shadow-lg backdrop-blur-md md:gap-20 md:text-base">
         <li>
           <a
