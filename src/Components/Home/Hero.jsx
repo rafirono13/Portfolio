@@ -83,8 +83,8 @@ const Hero = () => {
           whileTap={{ scale: 0.95 }}
         >
           <a
-            href="/path-to-your-resume.pdf"
-            download
+            href="/rafi_resume.pdf"
+            download="MD_Rafi_Resume.pdf"
             className="flex h-12 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur-md transition duration-300 hover:scale-105 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-400"
           >
             <FiDownload />
@@ -92,7 +92,7 @@ const Hero = () => {
           </a>
           <div className="flex items-center justify-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/rafirono13"
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition duration-300 hover:scale-110 hover:text-cyan-400"
@@ -110,14 +110,14 @@ const Hero = () => {
               <FaLinkedin />
             </a>
             <a
-              href="mailto:your@email.com"
+              href="mailto:farhanmahbubrafi@gmail.com"
               className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition duration-300 hover:scale-110 hover:text-cyan-400"
               aria-label="Send Email"
             >
               <BiLogoGmail />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://facebook.com/md.rafi669"
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition duration-300 hover:scale-110 hover:text-cyan-400"
