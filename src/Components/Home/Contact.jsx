@@ -1,0 +1,134 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FiMapPin, FiSend } from 'react-icons/fi';
+
+const Contact = () => {
+  // Animation Variants
+  const sectionVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.3, delayChildren: 0.2 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: 'easeOut' },
+    },
+  };
+
+  // This will be the URL users are sent back to after submitting the form.
+  // It defaults to the current page URL + #contact.
+  const redirectUrl =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}${window.location.pathname}#contact`
+      : '#';
+
+  return (
+    <motion.section
+      id="contact"
+      className="py-20"
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <div className="flex flex-col lg:flex-row lg:gap-16">
+        {/* Left Side: Info */}
+        <motion.div
+          className="mb-12 w-full lg:mb-0 lg:w-2/5"
+          variants={itemVariants}
+        >
+          <h2 className="text-xl font-semibold text-gray-400">Let's talk</h2>
+          <h3 className="mt-1 text-4xl font-bold text-cyan-400 drop-shadow-md">
+            Contact me
+          </h3>
+          <p className="mt-4 text-gray-300">
+            Have a question or a project in mind? I'm always open to discussing
+            new opportunities and creative ideas. Feel free to reach out.
+          </p>
+          <div className="mt-6 flex items-center gap-3 text-gray-300">
+            <FiMapPin className="text-cyan-400" />
+            <span>Dhaka, Dhanmondi</span>
+          </div>
+        </motion.div>
+
+        {/* Right Side: Form */}
+        <motion.div className="w-full lg:w-3/5" variants={itemVariants}>
+          {/* UPDATED: This now uses a standard HTML form submission */}
+          <form
+            action="https://formsubmit.co/el/jekuwo"
+            method="POST"
+            className="space-y-6"
+          >
+            {/* --- FormSubmit.co settings --- */}
+            {/* 1. Subject line for the email you receive */}
+            <input
+              type="hidden"
+              name="_subject"
+              value="New submission from your Portfolio!"
+            ></input>
+            {/* 2. Page to redirect to after submission */}
+            <input type="hidden" name="_next" value={redirectUrl}></input>
+            {/* 3. Disable the captcha (optional) */}
+            <input type="hidden" name="_captcha" value="false"></input>
+
+            {/* --- Form Fields --- */}
+            <div>
+              <label htmlFor="name" className="sr-only">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Your Name"
+                required
+                className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-white placeholder-gray-500 transition-all focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/50"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="sr-only">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Your Email"
+                required
+                className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-white placeholder-gray-500 transition-all focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/50"
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="sr-only">
+                Message
+              </label>
+              <textarea
+                name="message"
+                id="message"
+                rows="5"
+                placeholder="Your Message"
+                required
+                className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-white placeholder-gray-500 transition-all focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/50"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="group flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-500/80 px-6 py-3 font-semibold text-black transition-all duration-300 hover:bg-cyan-500"
+            >
+              Send Message
+              <FiSend className="-mt-px transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
+          </form>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+};
+
+export default Contact;
