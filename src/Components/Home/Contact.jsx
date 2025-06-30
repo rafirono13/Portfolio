@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiMapPin, FiSend } from 'react-icons/fi';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const Contact = () => {
   const sectionVariants = {
@@ -24,6 +26,54 @@ const Contact = () => {
     typeof window !== 'undefined'
       ? `${window.location.origin}${window.location.pathname}#contact`
       : '#';
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://formsubmit.co/el/jekuwo', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        form.reset();
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'Message sent!',
+          showConfirmButton: false,
+          timer: 2500,
+          background: 'rgba(17, 25, 40, 0.8)',
+          color: '#fff',
+          timerProgressBar: true,
+          customClass: {
+            popup: 'backdrop-blur-md rounded-lg shadow-xl',
+          },
+        });
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (error) {
+      Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Something went wrong!',
+        showConfirmButton: false,
+        timer: 2500,
+        background: 'rgba(30, 30, 30, 0.9)',
+        color: '#fff',
+        timerProgressBar: true,
+        customClass: {
+          popup: 'backdrop-blur-md rounded-lg shadow-xl',
+        },
+      });
+    }
+  };
 
   return (
     <motion.section
@@ -56,20 +106,14 @@ const Contact = () => {
 
         {/* Right Side: Form */}
         <motion.div className="w-full lg:w-3/5" variants={itemVariants}>
-          <form
-            action="https://formsubmit.co/el/jekuwo"
-            method="POST"
-            className="space-y-6"
-          >
+          <form onSubmit={handleSubmit} className="space-y-6">
             <input
               type="hidden"
               name="_subject"
               value="New submission from your Portfolio!"
-            ></input>
-
-            <input type="hidden" name="_next" value={redirectUrl}></input>
-
-            <input type="hidden" name="_captcha" value="false"></input>
+            />
+            <input type="hidden" name="_next" value={redirectUrl} />
+            <input type="hidden" name="_captcha" value="false" />
 
             {/* --- Form Fields --- */}
             <div>
