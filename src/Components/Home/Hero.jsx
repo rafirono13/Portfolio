@@ -6,6 +6,44 @@ import { BiLogoGmail } from 'react-icons/bi';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
 
 const Hero = () => {
+  // Gmail compose URL generator function
+  const generateGmailComposeUrl = (to, subject, body) => {
+    const baseUrl = 'https://mail.google.com/mail/u/0/';
+    const params = new URLSearchParams({
+      view: 'cm',
+      fs: '1',
+      tf: '1',
+      to: to,
+      su: subject,
+      body: body,
+    });
+    return `${baseUrl}?${params.toString()}`;
+  };
+
+  // Email compose configuration
+  const emailConfig = {
+    to: 'farhanmahbubrafi@gmail.com',
+    subject: "Let's Work Together - Portfolio Inquiry",
+    body: `Hey Rafi,
+
+I found your portfolio and would love to connect! 
+
+I'm interested in discussing:
+- Web development projects
+- Collaboration opportunities
+- Your MERN stack expertise
+
+Looking forward to hearing from you!
+
+Best regards`,
+  };
+
+  const gmailComposeUrl = generateGmailComposeUrl(
+    emailConfig.to,
+    emailConfig.subject,
+    emailConfig.body,
+  );
+
   // Animation variants (no changes here)
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -83,7 +121,7 @@ const Hero = () => {
           whileTap={{ scale: 0.95 }}
         >
           <a
-            href="/rafi_resume.pdf"
+            href="/MD_Rafi_Resume.pdf"
             download="MD_Rafi_Resume.pdf"
             className="flex h-12 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur-md transition duration-300 hover:scale-105 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-400"
           >
@@ -110,9 +148,12 @@ const Hero = () => {
               <FaLinkedin />
             </a>
             <a
-              href="mailto:farhanmahbubrafi@gmail.com"
+              href={gmailComposeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition duration-300 hover:scale-110 hover:text-cyan-400"
-              aria-label="Send Email"
+              aria-label="Send Email via Gmail"
+              title="Open Gmail compose window"
             >
               <BiLogoGmail />
             </a>
@@ -154,8 +195,8 @@ const Hero = () => {
         variants={itemVariants}
       >
         <a
-          href="/path-to-your-resume.pdf"
-          download
+          href="/rafi_resume.pdf"
+          download="MD_Rafi_Resume.pdf"
           className="flex h-12 w-full max-w-xs items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur-md transition duration-300 hover:scale-105 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-400"
         >
           <FiDownload />
@@ -163,7 +204,7 @@ const Hero = () => {
         </a>
         <div className="flex items-center justify-center gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/rafirono13"
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition duration-300 hover:scale-110 hover:text-cyan-400"
@@ -181,14 +222,17 @@ const Hero = () => {
             <FaLinkedin />
           </a>
           <a
-            href="mailto:your@email.com"
-            className="border-w hite/20 flex h-12 w-12 items-center justify-center rounded-xl border bg-white/10 text-xl text-white backdrop-blur-md transition duration-300 hover:scale-110 hover:text-cyan-400"
-            aria-label="Send Email"
+            href={gmailComposeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition duration-300 hover:scale-110 hover:text-cyan-400"
+            aria-label="Send Email via Gmail"
+            title="Open Gmail compose window"
           >
             <BiLogoGmail />
           </a>
           <a
-            href="https://facebook.com"
+            href="https://facebook.com/md.rafi669"
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition duration-300 hover:scale-110 hover:text-cyan-400"
