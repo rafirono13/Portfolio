@@ -6,7 +6,6 @@ import { BiLogoGmail } from 'react-icons/bi';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
 
 const Hero = () => {
-  // Gmail compose URL generator function
   const generateGmailComposeUrl = (to, subject, body) => {
     const baseUrl = 'https://mail.google.com/mail/u/0/';
     const params = new URLSearchParams({
@@ -44,7 +43,6 @@ Best regards`,
     emailConfig.body,
   );
 
-  // Animation variants (no changes here)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -86,7 +84,7 @@ Best regards`,
       initial="hidden"
       animate="visible"
     >
-      {/* ⬅️ Left Side: Intro Text & Links */}
+      {/* Left Side: Intro Text & Links */}
       <motion.div
         className="flex w-full flex-col items-center gap-5 text-center text-white lg:w-1/2 lg:items-start lg:text-left"
         variants={containerVariants}
@@ -114,7 +112,7 @@ Best regards`,
           concept to completion, turning ideas into a digital reality.
         </motion.p>
 
-        {/* 💅 Socials & Resume Button (FOR DESKTOP) */}
+        {/* Socials & Resume Button (FOR DESKTOP) */}
         <motion.div
           className="mt-6 hidden items-center justify-center gap-4 lg:flex lg:justify-start"
           variants={itemVariants}
@@ -170,7 +168,7 @@ Best regards`,
         </motion.div>
       </motion.div>
 
-      {/* ➡️ Right Side: Avatar Banner */}
+      {/* Right Side: Avatar Banner */}
       <motion.div
         className="relative flex w-full max-w-sm items-center justify-center lg:w-1/2 lg:max-w-none"
         variants={avatarVariants}

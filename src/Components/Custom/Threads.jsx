@@ -74,7 +74,7 @@ const fragmentShader = `
 `;
 
 const Threads = ({
-  color = [0.1, 0.3, 0.9], // A nice blue color
+  color = [0.1, 0.3, 0.9],
   amplitude = 1,
   distance = 0.1,
   enableMouseInteraction = true,

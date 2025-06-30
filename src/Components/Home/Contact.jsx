@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { FiMapPin, FiSend } from 'react-icons/fi';
 
 const Contact = () => {
-  // Animation Variants
   const sectionVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -21,8 +20,6 @@ const Contact = () => {
     },
   };
 
-  // This will be the URL users are sent back to after submitting the form.
-  // It defaults to the current page URL + #contact.
   const redirectUrl =
     typeof window !== 'undefined'
       ? `${window.location.origin}${window.location.pathname}#contact`
@@ -59,22 +56,19 @@ const Contact = () => {
 
         {/* Right Side: Form */}
         <motion.div className="w-full lg:w-3/5" variants={itemVariants}>
-          {/* UPDATED: This now uses a standard HTML form submission */}
           <form
             action="https://formsubmit.co/el/jekuwo"
             method="POST"
             className="space-y-6"
           >
-            {/* --- FormSubmit.co settings --- */}
-            {/* 1. Subject line for the email you receive */}
             <input
               type="hidden"
               name="_subject"
               value="New submission from your Portfolio!"
             ></input>
-            {/* 2. Page to redirect to after submission */}
+
             <input type="hidden" name="_next" value={redirectUrl}></input>
-            {/* 3. Disable the captcha (optional) */}
+
             <input type="hidden" name="_captcha" value="false"></input>
 
             {/* --- Form Fields --- */}

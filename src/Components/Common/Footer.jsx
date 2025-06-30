@@ -24,7 +24,7 @@ const Footer = () => {
           color={[0.13, 0.83, 0.93]}
           amplitude={5}
           distance={0.5}
-          enableMouseInteraction={true}
+          enableMouseInteraction={false}
         />
       </div>
 

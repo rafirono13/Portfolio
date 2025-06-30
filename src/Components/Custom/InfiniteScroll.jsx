@@ -74,8 +74,6 @@ export default function InfiniteScroll({
     // Start the animation
     animate();
 
-    // --- CLEANUP ---
-    // This is crucial to prevent memory leaks when the component unmounts
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
@@ -84,7 +82,6 @@ export default function InfiniteScroll({
 
   return (
     <div className="relative h-full w-full overflow-hidden">
-      {/* These gradients now perfectly match the fade logic! */}
       <div className="pointer-events-none absolute top-0 left-0 z-10 h-1/4 w-full bg-gradient-to-b from-[#060010] to-transparent"></div>
       <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-1/4 w-full bg-gradient-to-t from-[#060010] to-transparent"></div>
 

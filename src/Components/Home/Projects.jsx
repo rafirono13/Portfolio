@@ -35,7 +35,7 @@ const projectData = [
   },
   {
     title: 'MERN CLI Setup',
-    image: null, // No image for CLI tool
+    image: null,
     description:
       'A command-line tool to boilerplate a MERN stack application instantly, saving hours of setup time.',
     liveLink: null,

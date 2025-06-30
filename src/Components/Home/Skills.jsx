@@ -1,8 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-// ... other imports
 import LetterGlitch from '../Custom/LetterGlitch';
-// Your shiny new InfiniteScroll component
 import InfiniteScroll from '../Custom/InfiniteScroll';
 import { FaGithub, FaNodeJs, FaReact } from 'react-icons/fa';
 import {
@@ -14,9 +12,7 @@ import {
   SiTailwindcss,
 } from 'react-icons/si';
 
-// ... (Your Skills component and skillsList array stay exactly the same)
 const Skills = () => {
-  // Your Tech Stack Items
   const skillsList = [
     {
       content: (
@@ -91,7 +87,6 @@ const Skills = () => {
     },
   ];
 
-  // ... (Your animation variants also stay the same)
   const sectionVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -119,7 +114,7 @@ const Skills = () => {
       viewport={{ once: true, amount: 0.2 }}
     >
       <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16">
-        {/* Left Side: Glitch Effect and Text */}
+        {/* Left Side: Glitch Effect*/}
         <motion.div
           className="relative mb-10 h-80 w-full overflow-hidden rounded-2xl lg:mb-0 lg:h-[500px] lg:w-1/2"
           variants={itemVariants}
@@ -127,15 +122,14 @@ const Skills = () => {
           <LetterGlitch />
         </motion.div>
 
-        {/* Right Side: Infinite Scroll with updated props */}
+        {/* Right Side: Infinite Scroll*/}
         <motion.div
           className="h-80 w-full text-white lg:h-[500px] lg:w-1/2"
           variants={itemVariants}
         >
-          {/* ✨ HERE ARE THE UPDATED PROPS! ✨ */}
           <InfiniteScroll
             items={skillsList}
-            speed={0.7} // Control the scroll speed here!
+            speed={0.4}
             direction="up"
             itemMinHeight={80}
           />
