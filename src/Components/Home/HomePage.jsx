@@ -3,6 +3,7 @@ import Hero from './Hero';
 import AboutMe from './AboutMe';
 import Projects from './Projects';
 import Contact from './Contact';
+import Skills from './Skills';
 
 const HomePage = () => {
   return (
@@ -10,6 +11,7 @@ const HomePage = () => {
       <section>
         <Hero></Hero>
         <AboutMe></AboutMe>
+        <Skills></Skills>
       </section>
       <main>
         <Projects></Projects>

@@ -1,135 +1,99 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { Observer } from 'gsap/Observer';
 
-gsap.registerPlugin(Observer);
+// Note: We removed Observer since we don't need user interaction!
+// gsap.registerPlugin(Observer);
 
 export default function InfiniteScroll({
-  width = '100%',
-  maxHeight = '100%',
   items = [],
-  itemMinHeight = 100,
-  isTilted = false,
-  tiltDirection = 'left',
-  autoplay = false,
-  autoplaySpeed = 0.5,
-  autoplayDirection = 'down',
-  pauseOnHover = false,
+  // Renamed for clarity and set a default that feels good!
+  speed = 1,
+  direction = 'up',
+  itemMinHeight = 80,
 }) {
-  const wrapperRef = useRef(null);
   const containerRef = useRef(null);
-
-  const getTiltTransform = () => {
-    if (!isTilted) return 'none';
-    return tiltDirection === 'left'
-      ? 'rotateX(10deg) rotateZ(-10deg) skewX(10deg)'
-      : 'rotateX(10deg) rotateZ(10deg) skewX(-10deg)';
-  };
+  const itemsRef = useRef([]);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || !items.length) return;
+    if (!container || items.length === 0) return;
 
-    const divItems = gsap.utils.toArray(container.children);
-    if (!divItems.length) return;
+    // --- SETUP ---
+    const allItems = itemsRef.current;
+    // We use the first item to calculate the total height, including its margin
+    const itemHeight = allItems[0].offsetHeight;
+    const itemMargin = parseFloat(getComputedStyle(allItems[0]).marginTop);
+    const totalItemHeight = itemHeight + itemMargin;
+    const containerHeight = container.offsetHeight;
 
-    const itemHeight = divItems[0].offsetHeight;
-    const totalHeight = itemHeight * items.length;
+    // Total height of the entire loop (all items stacked)
+    const loopHeight = totalItemHeight * items.length;
 
-    const wrapFn = gsap.utils.wrap(-itemHeight, totalHeight - itemHeight);
+    // This is the magic function that wraps items around when they go off-screen
+    const wrap = gsap.utils.wrap(0, loopHeight);
+    const directionFactor = direction === 'up' ? -1 : 1;
 
-    gsap.set(divItems, {
-      y: (i) => i * itemHeight,
+    // Set the initial vertical position for each item
+    gsap.set(allItems, {
+      y: (i) => i * totalItemHeight,
+      // We also manage opacity here for the fade-in/fade-out effect
+      opacity: 1,
     });
 
-    const timeline = gsap.timeline();
+    // --- ANIMATION LOOP using requestAnimationFrame for smoothness ---
+    let animationFrameId;
+    let currentY = 0;
 
-    if (autoplay) {
-      const directionFactor = autoplayDirection === 'down' ? 1 : -1;
-      const speedPerFrame = autoplaySpeed * directionFactor;
+    const animate = () => {
+      // Move the position by the desired speed
+      currentY += speed * directionFactor;
 
-      timeline.to(divItems, {
-        duration: items.length / (autoplaySpeed * 0.1), // Adjust duration based on speed
-        ease: 'none',
-        y: `+=${totalHeight * directionFactor}`,
-        modifiers: {
-          y: gsap.utils.unitize(wrapFn),
-        },
-        repeat: -1,
+      // Update each item's position and opacity
+      allItems.forEach((item, i) => {
+        // The core movement logic
+        const y = wrap(i * totalItemHeight + currentY);
+
+        // Calculate opacity based on position within the container for a smooth fade
+        const distanceFromCenter = Math.abs(
+          y - containerHeight / 2 + itemHeight / 2,
+        );
+        const fadeZone = containerHeight * 0.4; // How much of the top/bottom is used for fading
+        const opacity = Math.max(
+          0,
+          1 -
+            Math.max(0, distanceFromCenter - fadeZone) /
+              (containerHeight / 2 - fadeZone),
+        );
+
+        gsap.set(item, { y, opacity });
       });
 
-      if (pauseOnHover) {
-        container.addEventListener('mouseenter', () => timeline.pause());
-        container.addEventListener('mouseleave', () => timeline.play());
-      }
-    }
-
-    const observer = Observer.create({
-      target: container,
-      type: 'wheel,touch,pointer',
-      preventDefault: true,
-      onPress: ({ target }) => {
-        timeline.pause();
-        target.style.cursor = 'grabbing';
-      },
-      onRelease: ({ target }) => {
-        if (autoplay) timeline.play();
-        target.style.cursor = 'grab';
-      },
-      onWheel: ({ deltaY }) => {
-        gsap.to(divItems, {
-          duration: 0.5,
-          y: `+=${-deltaY * 2}`,
-          modifiers: { y: gsap.utils.unitize(wrapFn) },
-          ease: 'power2.out',
-        });
-      },
-      onDrag: ({ deltaY }) => {
-        gsap.to(divItems, {
-          duration: 0.5,
-          y: `+=${deltaY * 0.5}`,
-          modifiers: { y: gsap.utils.unitize(wrapFn) },
-          ease: 'power2.out',
-        });
-      },
-    });
-
-    return () => {
-      observer.kill();
-      timeline.kill();
+      animationFrameId = requestAnimationFrame(animate);
     };
-  }, [
-    items,
-    autoplay,
-    autoplaySpeed,
-    autoplayDirection,
-    pauseOnHover,
-    isTilted,
-    tiltDirection,
-  ]);
+
+    // Start the animation
+    animate();
+
+    // --- CLEANUP ---
+    // This is crucial to prevent memory leaks when the component unmounts
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+    // We only need to re-run the effect if the items array changes.
+  }, [items, speed, direction]);
 
   return (
-    <div
-      className="relative h-full w-full overflow-hidden"
-      ref={wrapperRef}
-      style={{ maxHeight }}
-    >
+    <div className="relative h-full w-full overflow-hidden">
+      {/* These gradients now perfectly match the fade logic! */}
       <div className="pointer-events-none absolute top-0 left-0 z-10 h-1/4 w-full bg-gradient-to-b from-[#060010] to-transparent"></div>
-      <div className="h-1/f ull pointer-events-none absolute bottom-0 left-0 z-10 w-full bg-gradient-to-t from-[#060010] to-transparent"></div>
+      <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-1/4 w-full bg-gradient-to-t from-[#060010] to-transparent"></div>
 
-      <div
-        className="flex cursor-grab flex-col overscroll-contain"
-        ref={containerRef}
-        style={{
-          width,
-          transform: getTiltTransform(),
-          transformOrigin: 'center center',
-        }}
-      >
+      <div className="relative h-full" ref={containerRef}>
         {items.map((item, i) => (
           <div
-            className="box-border flex items-center justify-center border-y border-white/10 p-4 text-center text-xl font-semibold select-none"
+            className="absolute my-3 flex w-full items-center justify-center rounded-full border border-white/10 bg-white/[.03] px-8 py-4 text-xl font-semibold text-white shadow-inner shadow-white/5 select-none"
             key={i}
+            ref={(el) => (itemsRef.current[i] = el)} // Store a ref to each item
             style={{ minHeight: `${itemMinHeight}px` }}
           >
             {item.content}
