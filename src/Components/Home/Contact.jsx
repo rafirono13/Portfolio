@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiMapPin, FiSend } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const sectionVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -22,21 +24,22 @@ const Contact = () => {
     },
   };
 
-  const redirectUrl =
-    typeof window !== 'undefined'
-      ? `${window.location.origin}${window.location.pathname}#contact`
-      : '#';
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     const form = e.target;
     const formData = new FormData(form);
 
     try {
-      const response = await fetch('https://formsubmit.co/el/jekuwo', {
-        method: 'POST',
-        body: formData,
-      });
+      // Replace with your actual email
+      const response = await fetch(
+        'https://formsubmit.co/farhanmahbubrafi@gmail.com',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      );
 
       if (response.ok) {
         form.reset();
@@ -44,9 +47,9 @@ const Contact = () => {
           toast: true,
           position: 'top-end',
           icon: 'success',
-          title: 'Message sent!',
+          title: 'Message sent successfully!',
           showConfirmButton: false,
-          timer: 2500,
+          timer: 3000,
           background: 'rgba(17, 25, 40, 0.8)',
           color: '#fff',
           timerProgressBar: true,
@@ -58,13 +61,14 @@ const Contact = () => {
         throw new Error('Failed to send');
       }
     } catch (error) {
+      console.error('Form submission error:', error);
       Swal.fire({
         toast: true,
         position: 'top-end',
         icon: 'error',
-        title: 'Something went wrong!',
+        title: 'Failed to send message. Please try again.',
         showConfirmButton: false,
-        timer: 2500,
+        timer: 3000,
         background: 'rgba(30, 30, 30, 0.9)',
         color: '#fff',
         timerProgressBar: true,
@@ -72,6 +76,8 @@ const Contact = () => {
           popup: 'backdrop-blur-md rounded-lg shadow-xl',
         },
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -107,15 +113,21 @@ const Contact = () => {
         {/* Right Side: Form */}
         <motion.div className="w-full lg:w-3/5" variants={itemVariants}>
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* FormSubmit.co Configuration */}
             <input
               type="hidden"
               name="_subject"
-              value="New submission from your Portfolio!"
+              value="New Portfolio Contact Form Submission"
             />
-            <input type="hidden" name="_next" value={redirectUrl} />
+            <input
+              type="hidden"
+              name="_next"
+              value={typeof window !== 'undefined' ? window.location.href : ''}
+            />
             <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
 
-            {/* --- Form Fields --- */}
+            {/* Form Fields */}
             <div>
               <label htmlFor="name" className="sr-only">
                 Name
@@ -129,6 +141,7 @@ const Contact = () => {
                 className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-white placeholder-gray-500 transition-all focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/50"
               />
             </div>
+
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
@@ -142,6 +155,7 @@ const Contact = () => {
                 className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-white placeholder-gray-500 transition-all focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/50"
               />
             </div>
+
             <div>
               <label htmlFor="message" className="sr-only">
                 Message
@@ -155,11 +169,13 @@ const Contact = () => {
                 className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-white placeholder-gray-500 transition-all focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/50"
               ></textarea>
             </div>
+
             <button
               type="submit"
-              className="group flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-500/80 px-6 py-3 font-semibold text-black transition-all duration-300 hover:bg-cyan-500"
+              disabled={isSubmitting}
+              className="group flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-500/80 px-6 py-3 font-semibold text-black transition-all duration-300 hover:bg-cyan-500 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Send Message
+              {isSubmitting ? 'Sending...' : 'Send Message'}
               <FiSend className="-mt-px transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </form>
