@@ -119,8 +119,8 @@ Best regards`,
           whileTap={{ scale: 0.95 }}
         >
           <a
-            href="/MD_Rafi_Resume.pdf"
-            download="MD_Rafi_Resume.pdf"
+            href="/Rafi_Resume.pdf"
+            download="/Rafi_Resume.pdf"
             className="flex h-12 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur-md transition duration-300 hover:scale-105 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-400"
           >
             <FiDownload />
@@ -193,7 +193,7 @@ Best regards`,
         variants={itemVariants}
       >
         <a
-          href="/Rafi_Resume.pdf?v=2"
+          href="/Rafi_Resume.pdf"
           download="/Rafi_Resume.pdf"
           className="flex h-12 w-full max-w-xs items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur-md transition duration-300 hover:scale-105 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-400"
         >
