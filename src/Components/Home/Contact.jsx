@@ -34,7 +34,7 @@ const Contact = () => {
     try {
       // Replace with your actual email
       const response = await fetch(
-        'https://formsubmit.co/farhanmahbubrafi@gmail.com',
+        'https://formsubmit.co/18e36d886217229d0d6639011014fbc78',
         {
           method: 'POST',
           body: formData,
@@ -122,7 +122,7 @@ const Contact = () => {
             <input
               type="hidden"
               name="_next"
-              value={typeof window !== 'undefined' ? window.location.href : ''}
+              value="https://portfolio-md-rafi.vercel.app/#contact"
             />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
