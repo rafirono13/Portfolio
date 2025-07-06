@@ -137,7 +137,7 @@ Best regards`,
               <FiGithub />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/md-rafi-mern"
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition duration-300 hover:scale-110 hover:text-cyan-400"
@@ -193,8 +193,8 @@ Best regards`,
         variants={itemVariants}
       >
         <a
-          href="/rafi_resume.pdf"
-          download="MD_Rafi_Resume.pdf"
+          href="/Rafi_Resume.pdf?v=2"
+          download="/Rafi_Resume.pdf"
           className="flex h-12 w-full max-w-xs items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur-md transition duration-300 hover:scale-105 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-400"
         >
           <FiDownload />
@@ -203,6 +203,7 @@ Best regards`,
         <div className="flex items-center justify-center gap-4">
           <a
             href="https://github.com/rafirono13"
+            h
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white backdrop-blur-md transition duration-300 hover:scale-110 hover:text-cyan-400"
