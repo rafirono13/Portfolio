@@ -4,10 +4,12 @@ import LetterGlitch from '../Custom/LetterGlitch';
 import InfiniteScroll from '../Custom/InfiniteScroll';
 import { FaGithub, FaNodeJs, FaReact, FaStripe } from 'react-icons/fa';
 import {
+  SiAxios,
   SiExpress,
   SiFirebase,
   SiJavascript,
   SiMongodb,
+  SiReactquery,
   SiReactrouter,
   SiTailwindcss,
 } from 'react-icons/si';
@@ -78,11 +80,18 @@ const Skills = () => {
       ),
     },
     {
-      content: <div className="flex items-center gap-3 text-white">Axios</div>,
+      content: (
+        <div className="flex items-center gap-3 text-white">
+          <SiAxios className="text-lime-400" size={30} /> Axios
+        </div>
+      ),
     },
     {
       content: (
-        <div className="flex items-center gap-3 text-white">TanStack Query</div>
+        <div className="flex items-center gap-3 text-white">
+          <SiReactquery className="text-yellow-300" size={30} />
+          TanStack Query
+        </div>
       ),
     },
     {
