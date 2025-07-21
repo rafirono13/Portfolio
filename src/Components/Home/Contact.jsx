@@ -28,38 +28,38 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const form = e.target;
-    const formData = new FormData(form);
+    // In a real application, you would handle form submission here,
+    // e.g., send data to a backend API using Axios or fetch.
+    // For now, we'll simulate a successful submission.
 
     try {
-      // Replace with your actual email
-      const response = await fetch(
-        'https://formsubmit.co/18e36d886217229d0d6639011014fbc78',
-        {
-          method: 'POST',
-          body: formData,
-        },
-      );
+      // Simulate an API call
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate network delay
 
-      if (response.ok) {
-        form.reset();
-        Swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: 'success',
-          title: 'Message sent successfully!',
-          showConfirmButton: false,
-          timer: 3000,
-          background: 'rgba(17, 25, 40, 0.8)',
-          color: '#fff',
-          timerProgressBar: true,
-          customClass: {
-            popup: 'backdrop-blur-md rounded-lg shadow-xl',
-          },
-        });
-      } else {
-        throw new Error('Failed to send');
-      }
+      // You can access form data like this:
+      const form = e.target;
+      const formData = new FormData(form);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const message = formData.get('message');
+
+      console.log('Form Data:', { name, email, message });
+
+      form.reset();
+      Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Message sent successfully!',
+        showConfirmButton: false,
+        timer: 3000,
+        background: 'rgba(17, 25, 40, 0.8)',
+        color: '#fff',
+        timerProgressBar: true,
+        customClass: {
+          popup: 'backdrop-blur-md rounded-lg shadow-xl',
+        },
+      });
     } catch (error) {
       console.error('Form submission error:', error);
       Swal.fire({
@@ -113,20 +113,6 @@ const Contact = () => {
         {/* Right Side: Form */}
         <motion.div className="w-full lg:w-3/5" variants={itemVariants}>
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* FormSubmit.co Configuration */}
-            <input
-              type="hidden"
-              name="_subject"
-              value="New Portfolio Contact Form Submission"
-            />
-            <input
-              type="hidden"
-              name="_next"
-              value="https://portfolio-md-rafi.vercel.app/#contact"
-            />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_template" value="table" />
-
             {/* Form Fields */}
             <div>
               <label htmlFor="name" className="sr-only">
