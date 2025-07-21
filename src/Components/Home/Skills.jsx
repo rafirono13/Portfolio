@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import LetterGlitch from '../Custom/LetterGlitch';
 import InfiniteScroll from '../Custom/InfiniteScroll';
-import { FaGithub, FaNodeJs, FaReact } from 'react-icons/fa';
+import { FaGithub, FaNodeJs, FaReact, FaStripe } from 'react-icons/fa';
 import {
   SiExpress,
   SiFirebase,
@@ -67,6 +67,13 @@ const Skills = () => {
       content: (
         <div className="flex items-center gap-3">
           <FaGithub className="text-white" size={30} /> GitHub
+        </div>
+      ),
+    },
+    {
+      content: (
+        <div className="flex items-center gap-3">
+          <FaStripe className="text-purple-400" size={30} /> Stripe
         </div>
       ),
     },

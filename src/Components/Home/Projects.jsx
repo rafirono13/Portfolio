@@ -44,7 +44,6 @@ const projectData = [
 ];
 
 const Projects = () => {
-  // Animation variants for the main container
   const sectionVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -105,7 +104,17 @@ const Projects = () => {
                   </div>
                 )}
               </div>
-              <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+
+              {/* Title + Badge with responsive layout */}
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                <h3 className="text-2xl font-bold text-white">
+                  {project.title}
+                </h3>
+                <span className="inline-block w-fit rounded-full bg-white/10 px-2 py-0.5 text-xs font-semibold text-cyan-400">
+                  In Development
+                </span>
+              </div>
+
               <p className="mt-2 flex-grow text-gray-400">
                 {project.description}
               </p>
