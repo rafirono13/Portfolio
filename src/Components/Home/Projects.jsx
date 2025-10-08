@@ -4,11 +4,19 @@ import { FiGithub, FiExternalLink, FiTerminal } from 'react-icons/fi';
 import SpotlightCard from '../Custom/SpotlightCard';
 
 // Project image imports
-import BillEase from '../../assets/BillEase.png';
+import Cura from '../../assets/Cura-medicine.png';
 import HobbyHub from '../../assets/HobbyHub.png';
 import Ridezy from '../../assets/Ridezy.png';
 
 const projectData = [
+  {
+    title: 'Cura',
+    image: Cura,
+    description:
+      'A comprehensive MERN stack e-commerce platform for purchasing medicines, featuring a secure payment gateway and a user-friendly interface.',
+    liveLink: 'https://cura-dd26c.web.app/',
+    githubLink: 'https://github.com/rafirono13/Cura-Pharmacy-Project-Client',
+  },
   {
     title: 'Ridezy',
     image: Ridezy,
@@ -24,14 +32,6 @@ const projectData = [
       'A social platform for hobbyists to connect, share projects, and discover new interests in a vibrant community setting.',
     liveLink: 'https://hobby-hub-1549a.web.app/',
     githubLink: 'https://github.com/rafirono13/Hobby-Hub',
-  },
-  {
-    title: 'BillEase',
-    image: BillEase,
-    description:
-      'A streamlined invoicing and billing application designed for freelancers and small businesses to manage clients and payments.',
-    liveLink: 'https://react-bill-98a27.web.app/',
-    githubLink: 'https://github.com/rafirono13/Bill-Ease',
   },
   {
     title: 'MERN CLI Setup',
