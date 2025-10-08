@@ -2,7 +2,7 @@
 
 Welcome to the official repository for my personal developer portfolio! This project is a digital canvas where I showcase my skills, projects, and journey as a MERN Stack Developer. Built with a passion for clean aesthetics and interactive experiences, this portfolio embodies a modern, glassmorphism design brought to life with slick animations.
 
-**[➡️ View the Live Site](https://portfolio-psi-puce.vercel.app/)**
+**[➡️ View the Live Site](https://portfolio-md-rafi.vercel.app/)**
 
 ---
 
