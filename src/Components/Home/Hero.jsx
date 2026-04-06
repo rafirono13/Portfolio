@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import HeroAvatar from '../../assets/Avatar.jpg';
+import HeroAvatar from '../../assets/_Avatar.webp';
 import { FiGithub, FiDownload } from 'react-icons/fi';
 import { BiLogoGmail } from 'react-icons/bi';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
